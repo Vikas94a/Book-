@@ -10,9 +10,9 @@ import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export default function ({image, title, name, id}){
 
-    const {loading, favorites, setFavorites, toggleFav, book}= useContext(AppContext)
-const isFavorites = favorites.some(fav=> fav.id !==book.id)
-    console.log(isFavorites)
+    const {loading, favorite, setFavorite, AddtoFav, book}= useContext(AppContext) //context to manage state 
+   const isFavorite = favorite.some((fav)=> fav.id ===id) // check if the book is favorite or not 
+    
 
 
     return(
@@ -23,17 +23,17 @@ const isFavorites = favorites.some(fav=> fav.id !==book.id)
 
         <div className="card-detail" key={id} >
             <img className="image" src={image} alt={title} />
-            <Link to={`/BookView/${id}`}>
+            <Link className='title' to={`/BookView/${id}`}>
             <h5 className="title" >{title}</h5>
             </Link>
             <p>{name}</p>
-            <FontAwesomeIcon
-                icon={  faHeart  }   
-                onClick={() => toggleFav({id, title,image,name})}
-                style={{cursor:"pointer",
-                    fontSize:"1.5rem",
-                    color: isFavorites ? "red": "grey"
-                
+            <FontAwesomeIcon id='id'
+                icon={  faHeart  }  
+                onClick={()=> AddtoFav({id, image, title,name})}
+                style={{
+                    float:"right",
+                    fontSize:"2rem",
+                    color:isFavorite ? "red" :"grey" // change color base on favorite 
                 }}
                 />
         </div>

@@ -3,24 +3,28 @@ import { AppContext } from "../App";
 import ProductCard from "../component/ProductCard";
 export default function FavBookView (){
 
-    const {favorites, setFavorits, loading} = useContext(AppContext)
+    const {favorite, setFavorit, loading} = useContext(AppContext) 
 
-    useEffect(()=>{
-        localStorage.setItem('favorites', JSON.stringify(favorites))
-      }, [favorites])
+ 
       
+      console.log(favorite)
 
     return(
        <div>
        {loading && <p>Loading...</p> }
-       {favorites.map((e)=>{
+       {favorite && <div  style={{display:"flex", flexDirection:"row", flexWrap:"wrap"}}> 
+        {favorite.map((e)=>{
+            console.log(e)
         return(
           <ProductCard
           key={e.id}
+          id={e.id}
           image={e.image}
+          title={e.title}
           />
         )
        })}
+       </div> }
        </div>
     )
 }

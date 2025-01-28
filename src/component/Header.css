@@ -3,4 +3,49 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px;
+    background-color: rgb(210, 209, 240);
+}
+
+.container{
+    width: 30%;
+}
+
+.form-container{
+border: 1px solid blue;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    border-radius: 9px;
+}
+
+.form-container input{
+    flex: 1;
+    border: none;
+    padding: 8px;
+    border-top-right-radius:9px ;
+    border-bottom-right-radius:9px ;
+}
+
+ input:focus{
+    border: none;
+    outline: none;
+}
+
+.search-icon{
+    width: 30px;
+   background-color: whitesmoke;
+   border: none;
+   outline: none;
+   border-top-left-radius:9px;
+   border-bottom-left-radius:9px ;
+   
+}
+
+.menu-icon{
+    width: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 12px;
 }

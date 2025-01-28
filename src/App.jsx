@@ -1,83 +1,77 @@
-import { useState, useEffect, createContext } from 'react'
-import { Outlet } from 'react-router-dom'
-import Header from './component/Header'
-import './App.css'
-import HomeView from './view/Homeview'
+import { useState, useEffect, createContext } from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./component/Header";
+import "./App.css";
+import HomeView from "./view/Homeview";
 
-
-export const AppContext = createContext()
-
-
+export const AppContext = createContext(); //global context to share state and function
 
 function App() {
+  const [apiURL, setApiUrl] = useState("https://gutendex.com/books");//Base Api
+  const [favorite, setFavorite] = useState(() => {
+    //favorite books from localstorage or empty arry if none exist
+    const updateLocalStorage = localStorage.getItem("favoriteList");
+    return updateLocalStorage ? JSON.parse(updateLocalStorage) : [];
+  });
+  const [loading, setLoading] = useState(false); // loading state 
+  const [error, setError] = useState(null);// error state 
+  const [book, setBook] = useState([]); // store the list of book
 
-  const [apiURL, setApiUrl]= useState("https://gutendex.com/books")
-const [favorites, setFavorites] = useState(() => {
-  const storedFavorites = localStorage.getItem('favoriteBooks');
-  return storedFavorites ? JSON.parse(storedFavorites) : [];});
-const[loading, setLoading] = useState(false)
-const [error, setError]= useState(null)
-const[book, setBook] = useState([])
+  useEffect(() => {
+    async function fetchData() { // fetch api async function
+      try {
+        setLoading(true);
+        setError(null);
 
+        const res = await fetch(apiURL);
+        const data = await res.json();
+        // console.log(data.results)
+        setBook(data.results); // update book state 
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData(); 
+  }, []); // empty arry that only run once
 
-useEffect(()=>{
+  function AddtoFav(bookList) { // function to add or remove in the favorite list 
+    let updateFav;
+    setFavorite((prevFav) => {
+      let exist = prevFav.some((fav) => fav.id === bookList.id); 
+      if (exist) { // check condition if it allready exist
+        return (updateFav = prevFav.filter((fav) => fav.id !== bookList.id));
+      } else {
+        updateFav = [...prevFav, bookList]; // if book dose not exist, add it to favorite
+      }
+      localStorage.setItem("favoriteList", JSON.stringify(updateFav)); // update local storage 
 
-async function fetchData() {
-  try{
-    setLoading(true)
-    setError(null)
-
-    const res = await fetch(apiURL)
-    const data = await res.json()
-// console.log(data.results)
-    setBook(data.results)
-  
-  }catch(error){
-    setError(error)
-  }finally{
-    setLoading(false)
+      return updateFav;
+    });
   }
-}
-  fetchData()
-},[])
-
-function toggleFav (book){
-setFavorites((prefav)=>{
-  const favList = prefav.some((fav)=>fav.id ===book.id)
-  if(favList){
-   return prefav.filter((fav)=> fav.id !== book.id);
-  }
-return [...prefav, book];
-});
-console.log(favorites)
-}
-
 
   return (
     <>
-
-<AppContext.Provider
-value={{
-  book,
-  favorites,
-  setFavorites,
-  toggleFav,
-    apiURL,
-    book,
-    loading,
-    setLoading,
-    setError
-  }}
->
-
-<Header/>
-<main>
-<Outlet/>
-</main>
-</AppContext.Provider>
-     
+      <AppContext.Provider
+        value={{
+          favorite,
+          setFavorite,
+          AddtoFav,
+          apiURL,
+          book,
+          loading,
+          setLoading,
+          setError,
+        }}
+      >
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+      </AppContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

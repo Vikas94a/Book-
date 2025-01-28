@@ -1,11 +1,13 @@
 .card{
     display: flex;
     flex-direction: column;
-    height: 260px;
+    min-height: 260px;
     width: 150px;
-  background-color: rgba(200, 215, 221, 0.864);
+  background-color: rgba(132, 202, 230, 0.864);
    padding: 20px;
    margin: 23px;
+   border-radius: 9px;
+   border: 4px double blue;
 }
 
 .image{
@@ -13,8 +15,11 @@
     height: 180px;
     width: 150px;
     padding-bottom:10px ;
+    outline: 1px double rgb(18, 18, 19);
 }
 
 .title{
     text-align: center;
+   text-decoration: none !important;
+    color: black;
 }
