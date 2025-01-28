@@ -1,8 +1,26 @@
 import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../App";
+import ProductCard from "../component/ProductCard";
+export default function FavBookView (){
 
-export default function FavBookView ({toggleFavorite}){
+    const {favorites, setFavorits, loading} = useContext(AppContext)
+
+    useEffect(()=>{
+        localStorage.setItem('favorites', JSON.stringify(favorites))
+      }, [favorites])
+      
 
     return(
-        <h1>hi</h1>
+       <div>
+       {loading && <p>Loading...</p> }
+       {favorites.map((e)=>{
+        return(
+          <ProductCard
+          key={e.id}
+          image={e.image}
+          />
+        )
+       })}
+       </div>
     )
 }

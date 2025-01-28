@@ -6,6 +6,7 @@ import ErrorView from './view/ErrorView.jsx'
 import HomeView from './view/Homeview.jsx'
 import BookByCategory from './view/BookByCategory.jsx'
 import BookView from './view/BookView.jsx'
+import FavBookView from './view/FavBookView.jsx'
 
 const router = createBrowserRouter([{
   path: "/",
@@ -25,6 +26,9 @@ const router = createBrowserRouter([{
         },{
           path:"/BookView/:id",
           element:<BookView/>
+        },{
+          path:"/FavBookView/",
+          element: <FavBookView/>
         }
 
 ]

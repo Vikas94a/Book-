@@ -1,10 +1,10 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faBars, faTimes, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuOption from "./MenuOption";
 import "./Header.css";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
+import { useParams, useNavigate, Link } from "react-router-dom"; 
 
 
 export default function Header() {
@@ -44,10 +44,14 @@ export default function Header() {
                     </button>
                 </form>
             </div>
+<Link to={`/FavBookView/`}>
+            <FontAwesomeIcon icon={faHeart}/>
+            </Link>
             <FontAwesomeIcon
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 icon={isMenuOpen ? faTimes : faBars}
             />
+           
             {isMenuOpen && <MenuOption />}
         </div>
     );

@@ -3,15 +3,16 @@ import { AppContext } from '../App'
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 
 
 export default function ({image, title, name, id}){
 
-    const {loading}= useContext(AppContext)
-    
+    const {loading, favorites, setFavorites, toggleFav, book}= useContext(AppContext)
+const isFavorites = favorites.some(fav=> fav.id !==book.id)
+    console.log(isFavorites)
 
 
     return(
@@ -28,7 +29,12 @@ export default function ({image, title, name, id}){
             <p>{name}</p>
             <FontAwesomeIcon
                 icon={  faHeart  }   
-                onClick={() => toggleFavorite(id)}
+                onClick={() => toggleFav({id, title,image,name})}
+                style={{cursor:"pointer",
+                    fontSize:"1.5rem",
+                    color: isFavorites ? "red": "grey"
+                
+                }}
                 />
         </div>
        
