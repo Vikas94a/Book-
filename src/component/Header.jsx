@@ -22,7 +22,7 @@ export default function Header() {
   function handleSubmit(e) { // prevent page relode
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/BookByCategory/${query}`); // redirect to Category page 
+      navigate(`/Book-/BookByCategory/${query}`); // redirect to Category page 
     }
   }
 
@@ -45,7 +45,7 @@ export default function Header() {
       </div>
       <div className="menu-icon">
         <Link to={`/Book-/FavBookView/`}>  {/*Navigate to FavBookView page*/} 
-          <FontAwesomeIcon className="heart-icon" icon={faHeart} />
+          <FontAwesomeIcon className="header-icon" icon={faHeart} />
         </Link>
         <FontAwesomeIcon
           onClick={() => setIsMenuOpen(!isMenuOpen)}
