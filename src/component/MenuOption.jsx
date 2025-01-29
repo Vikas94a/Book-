@@ -37,7 +37,8 @@ color:"black",
 backgroundColor:"white",
 padding:"4px",
 border:"1px solid black",
-textAlign:"center"
+textAlign:"center",
+zIndex:"1"
           }}
           
           
