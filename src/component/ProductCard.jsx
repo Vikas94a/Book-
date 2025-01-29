@@ -23,7 +23,7 @@ export default function ({image, title, name, id}){
 
         <div className="card-detail" key={id} >
             <img className="image" src={image} alt={title} />
-            <Link className='title' to={`/BookView/${id}`}>
+            <Link className='title' to={`/Book-/BookView/${id}`}>
             <h5 className="title" >{title}</h5>
             </Link>
             <p>{name}</p>

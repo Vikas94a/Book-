@@ -44,7 +44,7 @@ export default function Header() {
         </form>
       </div>
       <div className="menu-icon">
-        <Link to={`/FavBookView/`}>  {/*Navigate to FavBookView page*/} 
+        <Link to={`/Book-/FavBookView/`}>  {/*Navigate to FavBookView page*/} 
           <FontAwesomeIcon className="heart-icon" icon={faHeart} />
         </Link>
         <FontAwesomeIcon

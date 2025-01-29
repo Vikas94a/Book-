@@ -41,7 +41,7 @@ textAlign:"center"
           }}
           
           
-          key={i} to={`/BookByCategory/${topic.toLocaleLowerCase()}`}>
+          key={i} to={`/Book-/BookByCategory/${topic.toLocaleLowerCase()}`}>
             {topic}
           </Link>
         );

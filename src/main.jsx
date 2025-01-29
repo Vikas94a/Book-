@@ -9,25 +9,25 @@ import BookView from './view/BookView.jsx'
 import FavBookView from './view/FavBookView.jsx'
 
 const router = createBrowserRouter([{
-  path: "/",
+  path: "/Book-",
   element: <App/>,
   errorElement :<ErrorView/>,
   children:[{
-    path:"/",
+    path:"/Book-",
     element:<HomeView/>
         },
         {
-          path:"/HomeView/",
+          path:"/Book-/HomeView/",
           element:<HomeView/>
     
         },{
-          path:"/BookByCategory/:topic",
+          path:"/Book-/BookByCategory/:topic",
           element:<BookByCategory/>
         },{
-          path:"/BookView/:id",
+          path:"/Book-/BookView/:id",
           element:<BookView/>
         },{
-          path:"/FavBookView/",
+          path:"/Book-/FavBookView/",
           element: <FavBookView/>
         }
 
