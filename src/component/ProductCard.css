@@ -1,13 +1,14 @@
 .card{
     display: flex;
     flex-direction: column;
-    min-height: 260px;
+    max-height: 260px;
     width: 150px;
   background-color: rgba(132, 202, 230, 0.864);
    padding: 20px;
    margin: 23px;
    border-radius: 9px;
    border: 4px double blue;
+   position: relative;
 }
 
 .image{
@@ -22,4 +23,14 @@
     text-align: center;
    text-decoration: none !important;
     color: black;
+    width: 130px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.heart-icon{
+    position: absolute;
+    bottom: 46px;
+    left: 80px;
 }

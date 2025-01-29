@@ -48,9 +48,8 @@ export default function BookByCategory() {
     }
   }
 
-  return (
-    <>
-      {loading && <p>Loading ....</p>}
+  return ( loading ?  (<p>Loading ....</p>) :
+    (<>
       <div
         style={{
           display: "flex",
@@ -111,6 +110,6 @@ export default function BookByCategory() {
           Next
         </button>
       </div>
-    </>
+    </>)
   );
 }

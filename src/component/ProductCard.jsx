@@ -27,7 +27,7 @@ export default function ({image, title, name, id}){
             <h5 className="title" >{title}</h5>
             </Link>
             <p>{name}</p>
-            <FontAwesomeIcon id='id'
+            <FontAwesomeIcon id='id' className='heart-icon'
                 icon={  faHeart  }  
                 onClick={()=> AddtoFav({id, image, title,name})}
                 style={{
