@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../App";
 import ProductCard from "../component/ProductCard";
+
+
 export default function FavBookView (){
-
-    const {favorite, setFavorit, loading} = useContext(AppContext) 
-
- 
-      
+const {favorite, loading} =useContext(AppContext)  
       console.log(favorite)
 
     return(
@@ -19,7 +17,7 @@ export default function FavBookView (){
           <ProductCard
           key={e.id}
           id={e.id}
-          image={e.image}
+          image={e.image || e.formats["image/jpeg"]}
           title={e.title}
           />
         )

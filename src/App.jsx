@@ -7,7 +7,11 @@ import HomeView from "./view/Homeview";
 export const AppContext = createContext(); //global context to share state and function
 
 function App() {
-  const [apiURL, setApiUrl] = useState("https://gutendex.com/books");//Base Api
+  const apiURL = "https://gutendex.com/books" //Base Api
+  const [dynamic, setDynamic] = useState(apiURL);
+  const[nextPage, setNextPage] = useState("")
+  const[prevPage, setPrevPage] = useState("")
+
   const [favorite, setFavorite] = useState(() => {
     //favorite books from localstorage or empty arry if none exist
     const updateLocalStorage = localStorage.getItem("favoriteList");
@@ -18,16 +22,26 @@ function App() {
   const [book, setBook] = useState([]); // store the list of book
   const [search, setSearch] = useState(false)
 
+
+
+  // useEffect(()=>{
+  //   setDynamic(apiURL)
+  // },[])
+
   useEffect(() => {
     async function fetchData() { // fetch api async function
       try {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(apiURL);
+        const res = await fetch(`${dynamic}`);
         const data = await res.json();
         // console.log(data.results)
         setBook(data.results); // update book state 
+        setNextPage(data.next)
+        setPrevPage(data.previous)
+
+        // console.log(nextPage)
       } catch (error) {
         setError(error);
       } finally {
@@ -35,7 +49,8 @@ function App() {
       }
     }
     fetchData(); 
-  }, []); // empty arry that only run once
+  }, [dynamic]); // empty arry that only run once
+
 
   function AddtoFav(bookList) { // function to add or remove in the favorite list 
     let updateFav;
@@ -56,10 +71,13 @@ function App() {
     <>
       <AppContext.Provider
         value={{
+          nextPage,
+          prevPage,
           favorite,
           setFavorite,
           AddtoFav,
           apiURL,
+          setDynamic,
           book,
           loading,
           setLoading,

@@ -39,7 +39,7 @@ export default function Header() {
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)} // update query state 
+            onChange={(e) => setQuery(e.target.value.trim())} // update query state 
             placeholder="Search for a category..."
           />
           <button className="search-icon" type="submit">

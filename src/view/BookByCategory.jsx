@@ -88,7 +88,7 @@ console.log(currentPage)
 
      {!loading && booksByTopic && (
       
-      <div>
+      <div style={{display:"flex", flexWrap:"wrap"}}>
         {console.log(booksByTopic)}
           {booksByTopic.map((e) => {
           return (

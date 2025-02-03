@@ -4,14 +4,16 @@ import { AppContext } from "../App"
 import ProductCard from "../component/ProductCard"
 
 export default function HomeView(){
-const{ apiURL, setError, loading, book} =useContext(AppContext)
+const{ dynamic,setDynamic, setError, loading,book, nextPage, prevPage} =useContext(AppContext)
 
-
+function handleNextPage() {
+      setDynamic(nextPage);
+  }
 
     return(
-        
+        <>
         <div style={{display:"flex", flexWrap:"wrap", gap:"", justifyContent:"center", alignItems:"center", }}>
-
+{/* {console.log(nextPage)} */}
             
             {loading && <p>loading...</p> }
        {book.map((book)=>{
@@ -24,7 +26,27 @@ return(
     />
 )
        })}
+      
        </div>
+       <div style={{width:"90%", justifyContent:"center", display:"flex",padding:"15px"}}>
+       {prevPage && <button style={{
+                backgroundColor: "transparent",
+                fontSize: "1.2rem",
+                padding: "4px",
+                border: "none",
+                outline: "2px double blue",
+                 marginRight:"18px"
+              }} onClick={()=>setDynamic(prevPage)}>Previous</button>}
+        <button style={{
+                backgroundColor: "transparent",
+                fontSize: "1.2rem",
+                padding: "4px",
+                border: "none",
+                outline: "2px double blue",
+                marginLeft:"18px"
+              }} onClick={handleNextPage}>Next</button>
+       </div>
+       </>
     )
     
 }
