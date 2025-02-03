@@ -8,20 +8,24 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuOption from "./MenuOption";
 import "./Header.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { AppContext } from "../App";
 
 export default function Header() {
   const { topic } = useParams(); // get topic pram from URL
   const [query, setQuery] = useState(""); 
   const [isMenuOpen, setIsMenuOpen] = useState(false); // track if menu is open or not
   const navigate = useNavigate();
+  const {search, setSearch} = useContext(AppContext)
+  
 
 
   // function for search submission
   function handleSubmit(e) { // prevent page relode
     e.preventDefault();
     if (query.trim()) {
+      setSearch(true)
       navigate(`/Book-/BookByCategory/${query}`); // redirect to Category page 
     }
   }

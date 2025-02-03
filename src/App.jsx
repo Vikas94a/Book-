@@ -16,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(false); // loading state 
   const [error, setError] = useState(null);// error state 
   const [book, setBook] = useState([]); // store the list of book
+  const [search, setSearch] = useState(false)
 
   useEffect(() => {
     async function fetchData() { // fetch api async function
@@ -63,6 +64,8 @@ function App() {
           loading,
           setLoading,
           setError,
+          search,
+          setSearch
         }}
       >
         <Header />

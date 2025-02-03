@@ -3,22 +3,43 @@ import { useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import ProductCard from "../component/ProductCard";
 
-export default function BookByCategory() {
-  const { topic } = useParams(); // get the current topic
 
-  const { apiURL, setLoading, setError, loading, error } =
-    useContext(AppContext); // gloval variable 
-  const [booksByTopic, setBooksByTopic] = useState([]); // Array of book
-  const [currentPage, setCurrentPage] = useState(`${apiURL}?topic=${topic}`); // dynamic URL
+
+
+export default function BookByCategory() {
+ 
+  const { topic } = useParams(); // get the current topic
+console.log(topic)
+
+  const { apiURL, setLoading, setError, loading, error, search, setSearch } =
+    useContext(AppContext); // global variable 
+  const [booksByTopic, setBooksByTopic] = useState(null); // Array of book
+  const [currentPage, setCurrentPage] = useState(null); // dynamic URL
   const [nextPage, setNextPage] = useState(""); // next page url
   const [previousPage, setPreviousPage] = useState("");// previous page url
   
+  
+
+  useEffect(()=>{
+    if (search) { 
+    setCurrentPage(`${apiURL}?search=${topic}`)}
+
+    else if (!search) {
+    setCurrentPage(`${apiURL}?topic=${topic}`)}
+  },[topic])
+// setCurrentPage(ieruv)
+
+// setCurrentPage((prevPage) =>)
+
+  console.log(currentPage)
   useEffect(() => {
+    
     async function fetchData() {
       try {
         setLoading(true); // setLoading true while fetching data
         setError(null); // clear previous errors
-
+setSearch(false)
+console.log(currentPage)
         const res = await fetch(`${currentPage}`);// fetch data from current page
         const data = await res.json();
         setBooksByTopic(data.results); // update state
@@ -31,7 +52,7 @@ export default function BookByCategory() {
       }
     }
     fetchData();
-  }, [topic, currentPage]); // run whenever topic or currentpage change
+  }, [ currentPage]); // run whenever topic or currentpage change
 
 
   // handle next page btn function
@@ -48,8 +69,12 @@ export default function BookByCategory() {
     }
   }
 
-  return ( loading ?  (<p>Loading ....</p>) :
-    (<>
+  return ( 
+  <>
+ 
+  {loading  &&
+  <p>Loading ....</p>}
+   {console.log(booksByTopic)}
       <div
         style={{
           display: "flex",
@@ -60,25 +85,37 @@ export default function BookByCategory() {
           alignItems: "center",
         }}
       >
-        {booksByTopic.map((e) => {
+
+     {!loading && booksByTopic && (
+      
+      <div>
+        {console.log(booksByTopic)}
+          {booksByTopic.map((e) => {
           return (
             <ProductCard
               key={e.id}
               id={e.id}
-              image={e.formats["image/jpeg"]}
+              image={ e.formats["image/jpeg"]}
               title={e.title}
             />
           );
         })}
+        </div>)
+      }
+        
       </div>
       <div
         style={{
           display: "flex",
-          width: "100%",
-          justifyContent: "space-around",
+          width: "90%",
+          justifyContent: "center",
           alignItems: "center",
+          padding: "18px",
+          gap: "22px"
         }}
+
       >
+
         {previousPage ? (
           <button
             style={{
@@ -94,22 +131,25 @@ export default function BookByCategory() {
             Previous{" "}
           </button>
         ) : (
-          ""
-        )}
-        <button
-          style={{
-            backgroundColor: "transparent",
-            fontSize: "1.2rem",
-            padding: "4px",
-            border: "none",
-            outline: "2px double blue",
-          }}
-          onClick={handleNextPage}
-        >
-          {" "}
-          Next
-        </button>
+          "" )}
+
+          {
+            nextPage? ( <button
+              style={{
+                backgroundColor: "transparent",
+                fontSize: "1.2rem",
+                padding: "4px",
+                border: "none",
+                outline: "2px double blue",
+              }}
+              onClick={handleNextPage}
+            >
+              {" "}
+              Next
+            </button>): ("")
+          }
+       
       </div>
-    </>)
+    </>
   );
 }

@@ -26,23 +26,24 @@ export default function MenuOption() {
         position: "absolute",
         right: "2px",
         top: "43px",
-    width:"110px"
+        width: "110px",
       }}
     >
       {option.map((topic, i) => {
         return (
-          <Link 
-          style={{textDecoration:"none",
-color:"black",
-backgroundColor:"white",
-padding:"4px",
-border:"1px solid black",
-textAlign:"center",
-zIndex:"1"
-          }}
-          
-          
-          key={i} to={`/Book-/BookByCategory/${topic.toLocaleLowerCase()}`}>
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "black",
+              backgroundColor: "white",
+              padding: "4px",
+              border: "1px solid black",
+              textAlign: "center",
+              zIndex: "1",
+            }}
+            key={i}
+            to={`/Book-/BookByCategory/${topic.toLocaleLowerCase()}`}
+          >
             {topic}
           </Link>
         );
