@@ -11,12 +11,17 @@ export default function ({ image, title, name, id }) {
   const isFavorite = favorite.some((fav) => fav.id === id); // check if the book is favorite or not
 
   return (
+    <>
+  
     <div className="card">
-      {loading ? (<p> Loading....</p>) : ( <div className="card-detail" key={id}>
+      {loading ? (<p> Loading....</p>) : ( 
+          
+        <div className="card-detail" key={id}>
+          <Link className="title" to={`/Book-/BookView/${id}`}>
         <img className="image" src={image} alt={title} />
-        <Link className="title" to={`/Book-/BookView/${id}`}>
+        
           <h5 className="title">{title}</h5>
-        </Link>
+       
         <p>{name}</p>
         <FontAwesomeIcon
           id="id"
@@ -29,8 +34,10 @@ export default function ({ image, title, name, id }) {
             color: isFavorite ? "red" : "grey", // change color base on favorite
           }}
         />
+         </Link>
       </div>)}
-     
     </div>
+    
+     </>
   );
 }

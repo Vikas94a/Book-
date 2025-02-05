@@ -39,8 +39,8 @@ export default function Header() {
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value.trim())} // update query state 
-            placeholder="Search for a category..."
+            onChange={(e) => setQuery(e.target.value)} // update query state 
+            placeholder="Search for a Book..."
           />
           <button className="search-icon" type="submit">
             <FontAwesomeIcon icon={faSearch} />  {/*serach icon*/} 
