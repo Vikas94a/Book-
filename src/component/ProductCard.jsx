@@ -23,6 +23,7 @@ export default function ({ image, title, name, id }) {
           <h5 className="title">{title}</h5>
        
         <p>{name}</p>
+        </Link>
         <FontAwesomeIcon
           id="id"
           className="heart-icon"
@@ -34,7 +35,7 @@ export default function ({ image, title, name, id }) {
             color: isFavorite ? "red" : "grey", // change color base on favorite
           }}
         />
-         </Link>
+        
       </div>)}
     </div>
     

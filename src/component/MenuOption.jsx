@@ -17,7 +17,13 @@ const option = [
   "Philosophy",
 ];
 
-export default function MenuOption() {
+
+
+export default function MenuOption({setMenuoption}) {
+
+  function toggleMenu(){
+    setMenuoption(false)
+    }
   return (
     <div
       style={{
@@ -32,6 +38,7 @@ export default function MenuOption() {
       {option.map((topic, i) => {
         return (
           <Link
+          onClick={toggleMenu}
             style={{
               textDecoration: "none",
               color: "black",

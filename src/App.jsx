@@ -8,7 +8,7 @@ export const AppContext = createContext(); //global context to share state and f
 
 function App() {
   const apiURL = "https://gutendex.com/books" //Base Api
-  const [dynamic, setDynamic] = useState(apiURL);
+  const [dynamic, setDynamic] = useState(`${apiURL}`);
   const[nextPage, setNextPage] = useState("")
   const[prevPage, setPrevPage] = useState("")
 

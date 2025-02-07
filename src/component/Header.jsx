@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <div className="header">
-      <h3>Book Store</h3>
+      <h3 style={{color:"white"}}>Book Store</h3>
       <div className="container">
         <form className="form-container" onSubmit={handleSubmit}>
           <input
@@ -52,10 +52,11 @@ export default function Header() {
           <FontAwesomeIcon className="header-icon" icon={faHeart} />
         </Link>
         <FontAwesomeIcon
+      className="toggle-menu"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           icon={isMenuOpen ? faTimes : faBars}
         />
-        {isMenuOpen && <MenuOption />}
+        {isMenuOpen && <MenuOption option={setIsMenuOpen} />}
       </div>
     </div>
   );

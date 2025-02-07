@@ -5,7 +5,7 @@ import ProductCard from "../component/ProductCard";
 import { height } from "@fortawesome/free-brands-svg-icons/fa42Group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faStar } from "@fortawesome/free-solid-svg-icons";
-
+import ReactLoading from 'react-loading';
 
 
 
@@ -39,7 +39,7 @@ try{
     },[id]) // re-run whenever id change 
 
 if(loading){
-    return <p> Loading...</p>
+    return 
 }if(!bookDetail){
     return <p>No book detail</p>
 }

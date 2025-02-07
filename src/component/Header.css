@@ -3,20 +3,31 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    background-color: rgb(210, 209, 240);
+    background-color: rgb(243, 141, 59);
 }
+
+
 
 .container{
     width: 30%;
 }
 
 .form-container{
-border: 1px solid blue;
+border: 1px solid rgb(129, 129, 194);
     width: 100%;
     display: flex;
     justify-content: flex-end;
     flex-direction: row-reverse;
     border-radius: 9px;
+}
+
+.header-icon{
+    font-size: 2rem;
+    padding-right: 19px;
+}
+
+.toggle-menu{
+    font-size: 2rem;
 }
 
 .form-container input{
@@ -49,3 +60,4 @@ border: 1px solid blue;
     justify-content: space-between;
     margin-right: 12px;
 }
+

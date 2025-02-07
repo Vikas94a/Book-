@@ -2,154 +2,142 @@ import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import ProductCard from "../component/ProductCard";
-
-
-
+import ReactLoading from "react-loading";
 
 export default function BookByCategory() {
- 
   const { topic } = useParams(); // get the current topic
-console.log(topic)
-
   const { apiURL, setLoading, setError, loading, error, search, setSearch } =
-    useContext(AppContext); // global variable 
-  const [booksByTopic, setBooksByTopic] = useState(null); // Array of book
-  const [currentPage, setCurrentPage] = useState(null); // dynamic URL
-  const [nextPage, setNextPage] = useState(""); // next page url
-  const [previousPage, setPreviousPage] = useState("");// previous page url
-  
-  
+    useContext(AppContext);
+  const [booksByTopic, setBooksByTopic] = useState([]);
+  const [currentPage, setCurrentPage] = useState(null);
+  const [nextPage, setNextPage] = useState("");
+  const [previousPage, setPreviousPage] = useState("");
 
-  useEffect(()=>{
-    if (search) { 
-    setCurrentPage(`${apiURL}?search=${topic}`)}
-
-    else if (!search) {
-    setCurrentPage(`${apiURL}?topic=${topic}`)}
-  },[topic])
-// setCurrentPage(ieruv)
-
-// setCurrentPage((prevPage) =>)
-
-  console.log(currentPage)
+  // Set the current page based on topic or search
   useEffect(() => {
-    
+    if (search) {
+      setCurrentPage(`${apiURL}?search=${topic}`);
+    } else if (topic) {
+      setCurrentPage(`${apiURL}?topic=${topic}`);
+    }
+  }, [search, topic, apiURL]);
+
+  // Fetch data when currentPage or topic changes
+  useEffect(() => {
     async function fetchData() {
+      if (!currentPage) return; // Prevent fetching when currentPage is null
+
       try {
-        setLoading(true); // setLoading true while fetching data
-        setError(null); // clear previous errors
-setSearch(false)
-console.log(currentPage)
-        const res = await fetch(`${currentPage}`);// fetch data from current page
+        setLoading(true);
+        setError(null);
+        setSearch(false);
+
+        const res = await fetch(currentPage);
         const data = await res.json();
-        setBooksByTopic(data.results); // update state
-        setNextPage(data.next);// update state 
-        setPreviousPage(data.previous); // update state
+        setBooksByTopic(data.results);
+        setNextPage(data.next);
+        setPreviousPage(data.previous);
       } catch (error) {
-        setError(error); 
+        setError(error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
-  }, [ currentPage]); // run whenever topic or currentpage change
+  }, [currentPage, topic]);
 
-
-  // handle next page btn function
+  // Handle pagination
   function handleNextPage() {
     if (nextPage) {
       setCurrentPage(nextPage);
     }
   }
 
-  // handle previous page function
   function handlePreviousPage() {
     if (previousPage) {
       setCurrentPage(previousPage);
     }
   }
 
-  return ( 
-  <>
- 
-  {loading  &&
-  <p>Loading ....</p>}
-   {console.log(booksByTopic)}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-
-     {!loading && booksByTopic && (
-      
-      <div style={{display:"flex", flexWrap:"wrap"}}>
-        {console.log(booksByTopic)}
-          {booksByTopic.map((e) => {
-          return (
-            <ProductCard
-              key={e.id}
-              id={e.id}
-              image={ e.formats["image/jpeg"]}
-              title={e.title}
-            />
-          );
-        })}
-        </div>)
-      }
-        
-      </div>
-      <div
-        style={{
-          display: "flex",
-          width: "90%",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "18px",
-          gap: "22px"
-        }}
-
-      >
-
-        {previousPage ? (
-          <button
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "80vh",
+      }}
+    >
+      {loading ? (
+        <ReactLoading type="spin" color="#F38D3B" />
+      ) : (
+        <div>
+          <div
             style={{
-              backgroundColor: "transparent",
-              fontSize: "1.2rem",
-              padding: "4px",
-              border: "none",
-              outline: "2px double blue",
+              display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            onClick={handlePreviousPage}
           >
-            {" "}
-            Previous{" "}
-          </button>
-        ) : (
-          "" )}
-
-          {
-            nextPage? ( <button
-              style={{
-                backgroundColor: "transparent",
-                fontSize: "1.2rem",
-                padding: "4px",
-                border: "none",
-                outline: "2px double blue",
-              }}
-              onClick={handleNextPage}
-            >
-              {" "}
-              Next
-            </button>): ("")
-          }
-       
-      </div>
-    </>
+            <div >
+              {booksByTopic && (
+                <div style={{ display: "flex", flexWrap: "wrap", flexDirection:"row" }}>
+                  {booksByTopic.map((e) => (
+                    <ProductCard
+                      key={e.id}
+                      id={e.id}
+                      image={e.formats["image/jpeg"]}
+                      title={e.title}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              width: "90%",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "18px",
+              gap: "22px",
+            }}
+          >
+            {previousPage && (
+              <button
+                style={{
+                  backgroundColor: "transparent",
+                  fontSize: "1.2rem",
+                  padding: "4px",
+                  border: "none",
+                  outline: "2px double blue",
+                }}
+                onClick={handlePreviousPage}
+              >
+                Previous
+              </button>
+            )}
+            {nextPage && (
+              <button
+                style={{
+                  backgroundColor: "transparent",
+                  fontSize: "1.2rem",
+                  padding: "4px",
+                  border: "none",
+                  outline: "2px double blue",
+                }}
+                onClick={handleNextPage}
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

@@ -2,6 +2,7 @@ import { Route } from "react-router-dom"
 import { useState, useContext } from "react"
 import { AppContext } from "../App"
 import ProductCard from "../component/ProductCard"
+import ReactLoading from 'react-loading';
 
 export default function HomeView(){
 const{ dynamic,setDynamic, setError, loading,book, nextPage, prevPage} =useContext(AppContext)
@@ -9,13 +10,20 @@ const{ dynamic,setDynamic, setError, loading,book, nextPage, prevPage} =useConte
 function handleNextPage() {
       setDynamic(nextPage);
   }
+console.log(dynamic)
+
+  {loading && <p>loading...</p> }
+
+
+
 
     return(
-        <>
-        <div style={{display:"flex", flexWrap:"wrap", gap:"", justifyContent:"center", alignItems:"center", }}>
+        <div style={{display:"flex", minHeight:"80vh", justifyContent:"center" , alignItems:"center"}}>
+      {loading ? <ReactLoading  type={"spin"} color="#F38D3B"  />:  <div>
+      <div style={{display:"flex", flexWrap:"wrap", gap:"", justifyContent:"center", alignItems:"center", }}>
 {/* {console.log(nextPage)} */}
             
-            {loading && <p>loading...</p> }
+            
        {book.map((book)=>{
 return(
     <ProductCard
@@ -46,7 +54,10 @@ return(
                 marginLeft:"18px"
               }} onClick={handleNextPage}>Next</button>
        </div>
-       </>
+      </div> }
+
+
+       </div>
     )
     
 }
