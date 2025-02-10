@@ -1,14 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../App";
+
 import ProductCard from "../component/ProductCard";
 import ReactLoading from "react-loading";
 
 export default function BookByCategory() {
-  const { topic } = useParams(); // get the current topic
+  const { topic, query } = useParams(); // get the current topic
   const { apiURL, setLoading, setError, loading, error, search, setSearch } =
     useContext(AppContext);
-  const [booksByTopic, setBooksByTopic] = useState([]);
+  const [booksByTopic, setBooksByTopic] = useState(null|| []);
   const [currentPage, setCurrentPage] = useState(null);
   const [nextPage, setNextPage] = useState("");
   const [previousPage, setPreviousPage] = useState("");
@@ -17,6 +18,7 @@ export default function BookByCategory() {
   useEffect(() => {
     if (search) {
       setCurrentPage(`${apiURL}?search=${topic}`);
+     
     } else if (topic) {
       setCurrentPage(`${apiURL}?topic=${topic}`);
     }
@@ -26,15 +28,16 @@ export default function BookByCategory() {
   useEffect(() => {
     async function fetchData() {
       if (!currentPage) return; // Prevent fetching when currentPage is null
-
+console.log(currentPage)
       try {
         setLoading(true);
         setError(null);
-        setSearch(false);
+        // setSearch(false);
 
         const res = await fetch(currentPage);
         const data = await res.json();
         setBooksByTopic(data.results);
+        console.log(data)
         setNextPage(data.next);
         setPreviousPage(data.previous);
       } catch (error) {
