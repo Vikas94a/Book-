@@ -35,6 +35,9 @@ console.log(currentPage)
         // setSearch(false);
 
         const res = await fetch(currentPage);
+
+        if (!res.ok) throw new Error(error)
+
         const data = await res.json();
         setBooksByTopic(data.results);
         console.log(data)
