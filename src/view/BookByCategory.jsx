@@ -72,10 +72,11 @@ console.log(currentPage)
         justifyContent: "center",
         alignItems: "center",
         minHeight: "80vh",
+        width:"100%"
       }}
     >
       {loading ? (
-        <ReactLoading type="spin" color="#F38D3B" />
+        <ReactLoading type="spin" color="#007BFF" />
       ) : (
         <div>
           <div
@@ -88,9 +89,9 @@ console.log(currentPage)
               alignItems: "center",
             }}
           >
-            <div >
+            <div>
               {booksByTopic && (
-                <div style={{ display: "flex", flexWrap: "wrap", flexDirection:"row" }}>
+                <div style={{ display: "flex", flexWrap: "wrap", flexDirection:"row", justifyContent:"center" }}>
                   {booksByTopic.map((e) => (
                     <ProductCard
                       key={e.id}
@@ -116,11 +117,12 @@ console.log(currentPage)
             {previousPage && (
               <button
                 style={{
-                  backgroundColor: "transparent",
-                  fontSize: "1.2rem",
-                  padding: "4px",
-                  border: "none",
-                  outline: "2px double blue",
+                  backgroundColor: "orange",
+                fontSize: "1.2rem",
+                padding: "9px",
+                color:"white",
+                border: "none",
+               borderRadius:"7px",
                 }}
                 onClick={handlePreviousPage}
               >
@@ -130,11 +132,12 @@ console.log(currentPage)
             {nextPage && (
               <button
                 style={{
-                  backgroundColor: "transparent",
+                  backgroundColor: "orange",
                   fontSize: "1.2rem",
-                  padding: "4px",
+                  padding: "9px",
+                  color:"white",
                   border: "none",
-                  outline: "2px double blue",
+                 borderRadius:"7px",
                 }}
                 onClick={handleNextPage}
               >

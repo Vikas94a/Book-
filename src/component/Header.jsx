@@ -33,7 +33,9 @@ export default function Header() {
 
   return (
     <div className="header">
-      <h3 style={{color:"white"}}>Book Store</h3>
+      <Link to={`/Book-/HomeView`}>
+      <h3 className="logo">Book Store</h3>
+      </Link>
       <div className="container">
         <form className="form-container" onSubmit={handleSubmit}>
           <input
@@ -58,6 +60,7 @@ export default function Header() {
         />
         {isMenuOpen && <MenuOption option={setIsMenuOpen} />}
       </div>
+
     </div>
   );
 }

@@ -1,63 +1,88 @@
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    background-color: rgb(243, 141, 59);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 8px 8px whitesmoke;
 }
 
-
-
-.container{
-    width: 30%;
+.logo {
+  color: rgb(0, 0, 0);
+  font-size: 1.4rem;
+  cursor: pointer;
 }
 
-.form-container{
-border: 1px solid rgb(129, 129, 194);
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    border-radius: 9px;
+.container {
+  width: 50%;
 }
 
-.header-icon{
-    font-size: 2rem;
-    padding-right: 19px;
+.form-container {
+  border: 2px solid rgb(181, 180, 180);
+  height: 42px;
+  display: flex;
+  border-radius: 20px;
 }
 
-.toggle-menu{
-    font-size: 2rem;
-}
-
-.form-container input{
+.form-container input {
     flex: 1;
     border: none;
     padding: 8px;
-    border-top-right-radius:9px ;
-    border-bottom-right-radius:9px ;
-}
+  }
 
- input:focus{
+
+  input:focus {
     border: none;
     outline: none;
+  }
+
+
+  input::placeholder {
+    color: gray;
+    font-style: italic;
+    opacity: 0.7;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+  }
+
+  input{
+    font-size: 1.1rem;
+  }
+  
+.search-icon {
+  width: 40px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  /* border-top-left-radius:9px;
+   border-bottom-left-radius:9px ; */
 }
 
-.search-icon{
-    width: 30px;
-   background-color: whitesmoke;
-   border: none;
-   outline: none;
-   border-top-left-radius:9px;
-   border-bottom-left-radius:9px ;
-   
+
+
+.header-icon {
+  font-size: 2rem;
+  padding-right: 19px;
+  color: rgb(127, 123, 123);
 }
 
-.menu-icon{
-    width: 5%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-right: 12px;
+.header-icon:hover{
+    color: red;
 }
 
+.toggle-menu {
+  font-size: 2rem;
+  color: rgb(28, 26, 26);
+}
+
+.toggle-menu:hover{
+color: rgb(121, 212, 224);
+}
+
+.menu-icon {
+  width: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 12px;
+}

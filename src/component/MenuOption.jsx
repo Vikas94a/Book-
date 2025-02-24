@@ -2,19 +2,19 @@ import { Link } from "react-router-dom";
 import BookByCategory from "../view/BookByCategory";
 
 const option = [
-  "Fiction",
-  "Mystery",
-  "Thriller",
-  "Romance",
-  "Fantasy",
-  "Morality",
-  "Society",
-  "Power",
-  "Justice",
-  "Adventure",
-  "Tragedy",
-  "War",
-  "Philosophy",
+  "fiction",
+  "mystery",
+  "thriller",
+  "romance",
+  "fantasy",
+  "morality",
+  "society",
+  "power",
+  "justice",
+  "adventure",
+  "tragedy",
+  "war",
+  "philosophy",
 ];
 
 
@@ -30,28 +30,31 @@ export default function MenuOption({setMenuoption}) {
         display: "flex",
         flexDirection: "column",
         position: "absolute",
-        right: "2px",
-        top: "43px",
+        right: "12px",
+        top: "53px",
         width: "110px",
       }}
     >
       {option.map((topic, i) => {
         return (
           <Link
-          onClick={toggleMenu}
+          // onClick={toggleMenu}
             style={{
+              paddingBottom:"6px",
               textDecoration: "none",
               color: "black",
               backgroundColor: "white",
-              padding: "4px",
+              padding: "8px",
+              width:"100px",
+              fontFamily:"poppins",
               border: "1px solid black",
               textAlign: "center",
               zIndex: "1",
             }}
             key={i}
-            to={`/Book-/BookByCategory/${topic.toLocaleLowerCase()}`}
+            to={`/Book-/BookByCategory/${topic}`}
           >
-            {topic}
+            {topic.toUpperCase()}
           </Link>
         );
       })}

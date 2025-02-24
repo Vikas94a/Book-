@@ -11,6 +11,7 @@ function App() {
   const [dynamic, setDynamic] = useState(`${apiURL}`);
   const[nextPage, setNextPage] = useState("")
   const[prevPage, setPrevPage] = useState("")
+  const[gutendexArray, SetGutendexArray] = useState([])
 
   const [favorite, setFavorite] = useState(() => {
     //favorite books from localstorage or empty arry if none exist
@@ -37,11 +38,13 @@ function App() {
         const res = await fetch(`${dynamic}`);
         const data = await res.json();
         // console.log(data.results)
+
+        SetGutendexArray(data)
         setBook(data.results); // update book state 
         setNextPage(data.next)
         setPrevPage(data.previous)
 
-        // console.log(nextPage)
+        
       } catch (error) {
         setError(error);
       } finally {
@@ -78,6 +81,7 @@ function App() {
           AddtoFav,
           apiURL,
           setDynamic,
+          gutendexArray,
           book,
           loading,
           setLoading,

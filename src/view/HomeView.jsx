@@ -1,29 +1,24 @@
-import { Route } from "react-router-dom"
+
 import { useState, useContext } from "react"
 import { AppContext } from "../App"
 import ProductCard from "../component/ProductCard"
 import ReactLoading from 'react-loading';
 
 export default function HomeView(){
-const{ dynamic,setDynamic, setError, loading,book, nextPage, prevPage} =useContext(AppContext)
+const{ dynamic,setDynamic, gutendexArray, loading,book, nextPage, prevPage} =useContext(AppContext)
 
 function handleNextPage() {
       setDynamic(nextPage);
   }
-console.log(dynamic)
+console.log(gutendexArray.count)
 
   {loading && <p>loading...</p> }
-
-
-
-
     return(
         <div style={{display:"flex", minHeight:"80vh", justifyContent:"center" , alignItems:"center"}}>
-      {loading ? <ReactLoading  type={"spin"} color="#F38D3B"  />:  <div>
+      {loading ? <ReactLoading  type={"spin"} color="#007BFF"  />:  <div>
       <div style={{display:"flex", flexWrap:"wrap", gap:"", justifyContent:"center", alignItems:"center", }}>
-{/* {console.log(nextPage)} */}
-            
-            
+{/* {console.log(nextPage)} */}     
+{/* <p>{gutendexArray.count}</p> */}
        {book.map((book)=>{
 return(
     <ProductCard
@@ -38,19 +33,21 @@ return(
        </div>
        <div style={{width:"90%", justifyContent:"center", display:"flex",padding:"15px"}}>
        {prevPage && <button style={{
-                backgroundColor: "transparent",
+                backgroundColor: "orange",
                 fontSize: "1.2rem",
-                padding: "4px",
+                padding: "9px",
+                color:"white",
                 border: "none",
-                outline: "2px double blue",
+               borderRadius:"7px",
                  marginRight:"18px"
               }} onClick={()=>setDynamic(prevPage)}>Previous</button>}
         <button style={{
-                backgroundColor: "transparent",
+                backgroundColor: "orange",
                 fontSize: "1.2rem",
-                padding: "4px",
+                padding: "9px",
+                color:"white",
                 border: "none",
-                outline: "2px double blue",
+               borderRadius:"7px",
                 marginLeft:"18px"
               }} onClick={handleNextPage}>Next</button>
        </div>

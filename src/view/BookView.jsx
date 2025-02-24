@@ -59,11 +59,10 @@ export default function () {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
-            border: "1px solid black",
           }}
         >
           <img
-            style={{ display: "inline-block", height: "360px" }}
+            style={{ display: "inline-block", height: "460px" }}
             src={bookDetail.formats["image/jpeg"]}
             alt=""
           />
@@ -94,12 +93,50 @@ export default function () {
             padding: "4px",
           }}
         >
-          <h3 style={{ padding: "4px" }}>{bookDetail.title}</h3>
+          <h3 style={{ padding: "4px", fontSize: "1.8rem",   overflow: "hidden", textOverflow: "ellipsis",  whiteSpace: "nowrap", width:"500px"  }}>
+            {bookDetail.title}
+          </h3>
           <p style={{ color: "red", marginBottom: "33px" }}>
             {" "}
             by {bookDetail.authors?.[0].name}
           </p>
-          <p style={{ maxWidth: "540px" }}>{bookDetail.summaries}</p>
+          <p style={{ maxWidth: "540px", color: "gray" }}>
+            {bookDetail.summaries}
+          </p>
+          <div
+            style={{
+              display: "flex",
+              marginTop: "30px",
+              gap: "20px",
+            }}
+          >
+            <a
+     href={bookDetail.formats[ "application/x-mobipocket-ebook"]}
+              style={{
+                backgroundColor: "orange",
+                border: "none",
+                padding: "10px",
+                color: "white",
+                fontWeight: "700",
+                borderRadius: "8px",
+              }}
+            >
+              Read online
+            </a>
+            <a
+             href={bookDetail.formats["application/octet-stream"]}
+              style={{
+                backgroundColor: "transparent",
+                border: "1px solid orange",
+                padding: "10px",
+                color: "black",
+                fontWeight: "500",
+                borderRadius: "8px",
+              }}
+            >
+              Download ebook
+            </a>
+          </div>
         </div>
       </div>
     </>
